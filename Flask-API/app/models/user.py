@@ -9,7 +9,11 @@ class User(db.Model):
     last_name = db.Column(db.String(100), nullable=False)
     password = db.Column(db.Integer())
     date_created = db.Column(db.DateTime(), default=datetime.utcnow)
-    
+    password_hash = db.Column(db.String(64) , nullable=False )
+    password_reset_token = db.Column(db.String(64) , nullable=True )
+    created_at = db.Column(db.DateTime() , nullable=False , default=datetime.utcnow)
+
+    user_type = db.Column(db.String(10))
     def save(self):
         db.session.add(self)
         db.session.commit()
